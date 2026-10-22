@@ -1,167 +1,146 @@
-Here is the HTML file for the animation based on your logline, color script, budget, and shot specifications. Since I cannot directly write to your local file system or run npx, please save this code as films/boy-is-going-market/index.html.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
-<title>Boy Going to Market</title>
-<style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    background-color: #1b2d6b; /* sky */
-    color: #e7eefc; /* line */
-    font-family: sans-serif;
-  }
-  #stage {
-    width: 1920px;
-    height: 1080px;
-    position: relative;
-    background-color: #1b2d6b;
-    overflow: hidden;
-  }
-  /* Color Script variables for reference */
-  :root {
-    --sky: #1b2d6b;
-    --ink: #101628;
-    --moon: #d5e2ff;
-    --accent: #e23b4a;
-    --practical: #f0c36a;
-    --iris: #e7a04a;
-    --skin: #f0c2ae;
-    --hair: #16141c;
-    --sclera: #f6f3ee;
-    --line: #e7eefc;
-  }
-  
-  .shot {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    display: none;
-  }
-
-  /* Shot 1: Establish 0.00-2.50s */
-  #shot1 {
-    display: block;
-    animation: shot1-timing 2.5s forwards, camera-zoom 2.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
-  }
-  
-  /* Shot 2: Approach 2.50-5.00s */
-  #shot2 {
-    animation: shot2-timing 2.5s 2.5s forwards;
-  }
-
-  /* Shot 3: Sakuga 5.00-9.00s */
-  #shot3 {
-    animation: shot3-timing 4s 5s forwards;
-  }
-
-  /* Shot 4: Button 9.00-12.00s */
-  #shot4 {
-    animation: shot4-timing 3s 9s forwards;
-  }
-  
-  #ink-fade {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: var(--ink);
-    opacity: 0;
-    pointer-events: none;
-    animation: fade-to-ink 0.33s 11.67s forwards; /* Last 8 frames of 24fps = ~0.33s */
-  }
-
-  .dialogue {
-    position: absolute;
-    bottom: 15%; /* bottom third */
-    left: 10%;
-    font-size: 48px;
-    color: var(--line);
-    text-shadow: 2px 2px 0 var(--ink);
-  }
-
-  @keyframes shot1-timing {
-    0%, 99.9% { opacity: 1; z-index: 1; }
-    100% { opacity: 0; z-index: 0; }
-  }
-  @keyframes camera-zoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.06); }
-  }
-  @keyframes shot2-timing {
-    0%, 99.9% { opacity: 1; z-index: 1; display: block; }
-    100% { opacity: 0; z-index: 0; display: none; }
-  }
-  @keyframes shot3-timing {
-    0%, 99.9% { opacity: 1; z-index: 1; display: block; }
-    100% { opacity: 0; z-index: 0; display: none; }
-  }
-  @keyframes shot4-timing {
-    0%, 100% { opacity: 1; z-index: 1; display: block; }
-  }
-  @keyframes fade-to-ink {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-
-  /* Placeholder SVG graphics for cel layers based on colors */
-  .cel {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>A Boy Is Going To The Market</title>
+  <style>
+    :root {
+      --sky: #1b2d6b;
+      --ink: #101628;
+      --moon: #d5e2ff;
+      --accent: #e23b4a;
+      --practical: #f0c36a;
+      --iris: #e7a04a;
+      --skin: #f0c2ae;
+      --hair: #16141c;
+      --sclera: #f6f3ee;
+      --line: #e7eefc;
+    }
+    body {
+      margin: 0;
+      background: var(--ink);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      color: var(--line);
+      font-family: sans-serif;
+    }
+    .frame {
+      width: 1920px;
+      height: 1080px;
+      background: var(--sky);
+      position: relative;
+      overflow: hidden;
+    }
+    .shot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+    /* Shot 1: Establish (0.00-2.50) */
+    .shot-1 {
+      animation: camera-move-1 2.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    }
+    @keyframes camera-move-1 {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.06); }
+    }
+    
+    /* Shot 2: Approach (2.50-5.00) */
+    .shot-2 {
+      transform: scale(1.06);
+    }
+    
+    /* Shot 3: Sakuga (5.00-9.00) */
+    .shot-3 {
+      /* Locked camera */
+    }
+    
+    /* Shot 4: Button (9.00-12.00) */
+    .shot-4 {
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 10%;
+      padding-left: 33%;
+    }
+    .dialogue {
+      font-size: 32px;
+      color: var(--line);
+      z-index: 10;
+    }
+    .fade-to-ink {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--ink);
+      opacity: 0;
+      animation: fade-out 0.33s linear forwards; /* 8 frames at 24fps */
+      animation-delay: 11.66s;
+    }
+    @keyframes fade-out {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-<div id="stage">
-  <!-- Shot 1: Establish -->
-  <div id="shot1" class="shot">
-    <svg class="cel" viewBox="0 0 1920 1080">
-      <rect width="1920" height="1080" fill="#1b2d6b"/> <!-- Sky -->
-      <circle cx="1600" cy="200" r="100" fill="#d5e2ff"/> <!-- Moon -->
-      <path d="M0,800 Q960,1080 1920,800 L1920,1080 L0,1080 Z" fill="#101628"/> <!-- Ink landscape -->
-      <!-- Small figure (3 drawings simulation would go here) -->
-      <circle cx="960" cy="780" r="15" fill="#e23b4a"/>
-    </svg>
+  <div class="frame">
+    <!-- Scene timeline orchestrator (mockup representation for timing) -->
+    
+    <!-- 1 · Establish · 0.00–2.50 (60 frames) -->
+    <div class="shot shot-1" id="shot1">
+       <!-- 3 Drawings, character small -->
+    </div>
+    
+    <!-- 2 · Approach · 2.50–5.00 (60 frames) -->
+    <div class="shot shot-2" id="shot2">
+       <!-- 3 Drawings, closer -->
+    </div>
+    
+    <!-- 3 · Sakuga · 5.00–9.00 (96 frames) -->
+    <div class="shot shot-3" id="shot3">
+       <!-- 8 Drawings on ones/twos. Rain/Sparks/Blade on ones. -->
+       <!-- Anticipate, play action, smear, settle hold for 12+ frames -->
+    </div>
+    
+    <!-- 4 · Button · 9.00–12.00 (72 frames) -->
+    <div class="shot shot-4" id="shot4">
+       <!-- Eyes on a third, dialogue in clear bottom third -->
+       <div class="dialogue">How beautiful are the sounds of morning birds, clouds and river.</div>
+    </div>
+    
+    <div class="fade-to-ink"></div>
   </div>
 
-  <!-- Shot 2: Approach -->
-  <div id="shot2" class="shot">
-    <svg class="cel" viewBox="0 0 1920 1080">
-      <rect width="1920" height="1080" fill="#101628"/>
-      <circle cx="960" cy="540" r="200" fill="#f0c2ae"/> <!-- Skin block -->
-      <path d="M760,540 Q960,100 1160,540" fill="#16141c"/> <!-- Hair -->
-    </svg>
-  </div>
-
-  <!-- Shot 3: Sakuga (Bicycle riding action, locked camera) -->
-  <div id="shot3" class="shot">
-    <svg class="cel" viewBox="0 0 1920 1080">
-      <rect width="1920" height="1080" fill="#1b2d6b"/>
-      <circle cx="400" cy="800" r="120" fill="none" stroke="#e7eefc" stroke-width="10"/> <!-- Bike wheel -->
-      <circle cx="800" cy="800" r="120" fill="none" stroke="#e7eefc" stroke-width="10"/>
-      <!-- Settle hold logic would rely on drawing swaps -->
-    </svg>
-  </div>
-
-  <!-- Shot 4: Button -->
-  <div id="shot4" class="shot">
-    <svg class="cel" viewBox="0 0 1920 1080">
-      <rect width="1920" height="1080" fill="#101628"/>
-      <!-- Eyes on a third, room in front of gaze -->
-      <ellipse cx="640" cy="360" rx="60" ry="30" fill="#f6f3ee"/> <!-- Sclera -->
-      <circle cx="660" cy="360" r="25" fill="#e7a04a"/> <!-- Iris -->
-    </svg>
-    <div class="dialogue">How beautiful are the sounds of morning birds, clouds and river.</div>
-  </div>
-
-  <!-- Fade out to ink at the very end -->
-  <div id="ink-fade"></div>
-</div>
+  <script>
+    // Timing logic to switch shots
+    const timeToFrames = (time) => time * 24;
+    
+    setTimeout(() => {
+      document.getElementById('shot1').style.display = 'block';
+    }, 0);
+    
+    setTimeout(() => {
+      document.getElementById('shot1').style.display = 'none';
+      document.getElementById('shot2').style.display = 'block';
+    }, 2500); // 2.5s
+    
+    setTimeout(() => {
+      document.getElementById('shot2').style.display = 'none';
+      document.getElementById('shot3').style.display = 'block';
+    }, 5000); // 5.0s
+    
+    setTimeout(() => {
+      document.getElementById('shot3').style.display = 'none';
+      document.getElementById('shot4').style.display = 'block';
+    }, 9000); // 9.0s
+  </script>
 </body>
 </html>
-
