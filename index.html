@@ -1,0 +1,167 @@
+Here is the HTML file for the animation based on your logline, color script, budget, and shot specifications. Since I cannot directly write to your local file system or run npx, please save this code as films/boy-is-going-market/index.html.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
+<title>Boy Going to Market</title>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #1b2d6b; /* sky */
+    color: #e7eefc; /* line */
+    font-family: sans-serif;
+  }
+  #stage {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background-color: #1b2d6b;
+    overflow: hidden;
+  }
+  /* Color Script variables for reference */
+  :root {
+    --sky: #1b2d6b;
+    --ink: #101628;
+    --moon: #d5e2ff;
+    --accent: #e23b4a;
+    --practical: #f0c36a;
+    --iris: #e7a04a;
+    --skin: #f0c2ae;
+    --hair: #16141c;
+    --sclera: #f6f3ee;
+    --line: #e7eefc;
+  }
+  
+  .shot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: none;
+  }
+
+  /* Shot 1: Establish 0.00-2.50s */
+  #shot1 {
+    display: block;
+    animation: shot1-timing 2.5s forwards, camera-zoom 2.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+  }
+  
+  /* Shot 2: Approach 2.50-5.00s */
+  #shot2 {
+    animation: shot2-timing 2.5s 2.5s forwards;
+  }
+
+  /* Shot 3: Sakuga 5.00-9.00s */
+  #shot3 {
+    animation: shot3-timing 4s 5s forwards;
+  }
+
+  /* Shot 4: Button 9.00-12.00s */
+  #shot4 {
+    animation: shot4-timing 3s 9s forwards;
+  }
+  
+  #ink-fade {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--ink);
+    opacity: 0;
+    pointer-events: none;
+    animation: fade-to-ink 0.33s 11.67s forwards; /* Last 8 frames of 24fps = ~0.33s */
+  }
+
+  .dialogue {
+    position: absolute;
+    bottom: 15%; /* bottom third */
+    left: 10%;
+    font-size: 48px;
+    color: var(--line);
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+
+  @keyframes shot1-timing {
+    0%, 99.9% { opacity: 1; z-index: 1; }
+    100% { opacity: 0; z-index: 0; }
+  }
+  @keyframes camera-zoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.06); }
+  }
+  @keyframes shot2-timing {
+    0%, 99.9% { opacity: 1; z-index: 1; display: block; }
+    100% { opacity: 0; z-index: 0; display: none; }
+  }
+  @keyframes shot3-timing {
+    0%, 99.9% { opacity: 1; z-index: 1; display: block; }
+    100% { opacity: 0; z-index: 0; display: none; }
+  }
+  @keyframes shot4-timing {
+    0%, 100% { opacity: 1; z-index: 1; display: block; }
+  }
+  @keyframes fade-to-ink {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* Placeholder SVG graphics for cel layers based on colors */
+  .cel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- Shot 1: Establish -->
+  <div id="shot1" class="shot">
+    <svg class="cel" viewBox="0 0 1920 1080">
+      <rect width="1920" height="1080" fill="#1b2d6b"/> <!-- Sky -->
+      <circle cx="1600" cy="200" r="100" fill="#d5e2ff"/> <!-- Moon -->
+      <path d="M0,800 Q960,1080 1920,800 L1920,1080 L0,1080 Z" fill="#101628"/> <!-- Ink landscape -->
+      <!-- Small figure (3 drawings simulation would go here) -->
+      <circle cx="960" cy="780" r="15" fill="#e23b4a"/>
+    </svg>
+  </div>
+
+  <!-- Shot 2: Approach -->
+  <div id="shot2" class="shot">
+    <svg class="cel" viewBox="0 0 1920 1080">
+      <rect width="1920" height="1080" fill="#101628"/>
+      <circle cx="960" cy="540" r="200" fill="#f0c2ae"/> <!-- Skin block -->
+      <path d="M760,540 Q960,100 1160,540" fill="#16141c"/> <!-- Hair -->
+    </svg>
+  </div>
+
+  <!-- Shot 3: Sakuga (Bicycle riding action, locked camera) -->
+  <div id="shot3" class="shot">
+    <svg class="cel" viewBox="0 0 1920 1080">
+      <rect width="1920" height="1080" fill="#1b2d6b"/>
+      <circle cx="400" cy="800" r="120" fill="none" stroke="#e7eefc" stroke-width="10"/> <!-- Bike wheel -->
+      <circle cx="800" cy="800" r="120" fill="none" stroke="#e7eefc" stroke-width="10"/>
+      <!-- Settle hold logic would rely on drawing swaps -->
+    </svg>
+  </div>
+
+  <!-- Shot 4: Button -->
+  <div id="shot4" class="shot">
+    <svg class="cel" viewBox="0 0 1920 1080">
+      <rect width="1920" height="1080" fill="#101628"/>
+      <!-- Eyes on a third, room in front of gaze -->
+      <ellipse cx="640" cy="360" rx="60" ry="30" fill="#f6f3ee"/> <!-- Sclera -->
+      <circle cx="660" cy="360" r="25" fill="#e7a04a"/> <!-- Iris -->
+    </svg>
+    <div class="dialogue">How beautiful are the sounds of morning birds, clouds and river.</div>
+  </div>
+
+  <!-- Fade out to ink at the very end -->
+  <div id="ink-fade"></div>
+</div>
+</body>
+</html>
+
