@@ -3,397 +3,367 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Anime Introduction</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shrey | Anime Story</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --accent: #79e7ff;
-  --bg: #070812;
-}
-
+* { box-sizing: border-box; }
 body {
-  background: var(--bg);
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow: hidden;
+  margin: 0; background: #101322; color: white;
+  font-family: Arial, sans-serif;
 }
-
-.scene {
-  position: relative;
-  width: 100%;
-  height: 100dvh;
-  min-height: 500px;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  isolation: isolate;
-  background:
-    radial-gradient(ellipse at 50% 60%,
-      #172c50 0%, #0a1024 35%, #070812 75%);
+#movie {
+  position: relative; width: 100%; height: 100svh;
+  min-height: 480px; overflow: hidden; isolation: isolate;
+  background: linear-gradient(#273a62 0%, #c66b77 48%,
+    #ffb16d 72%, #533d60 100%);
 }
-
-#stars {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+.sky { position: absolute; inset: 0; overflow: hidden; }
+.sun {
+  position: absolute; width: 34vw; height: 34vw;
+  max-width: 230px; max-height: 230px;
+  border-radius: 50%; background: #ffe0a1;
+  box-shadow: 0 0 70px #ffb875aa, 0 0 150px #ff995855;
+  top: 34%; left: 50%; transform: translate(-50%,-50%);
 }
-
-.glow {
-  position: absolute;
-  width: 65vw;
-  height: 65vw;
-  max-width: 550px;
-  max-height: 550px;
+.cloud {
+  position: absolute; width: 170px; height: 30px;
+  border-radius: 50%; background: #f7b1a855;
+  filter: blur(10px); animation: clouds 24s linear infinite;
+}
+.c1 { top: 20%; left: -200px; }
+.c2 { top: 42%; left: -260px; animation-duration: 34s; }
+.c3 { top: 12%; left: -300px; animation-duration: 42s; }
+@keyframes clouds {
+  to { transform: translateX(calc(100vw + 500px)); }
+}
+.mountain {
+  position: absolute; bottom: 15%; left: -20%;
+  width: 140%; height: 40%;
+  background: #56415e;
+  clip-path: polygon(0 80%, 20% 30%, 38% 70%,
+    58% 10%, 75% 65%, 91% 20%, 100% 70%, 100% 100%, 0 100%);
+}
+.ground {
+  position: absolute; bottom: -5%; width: 130%; left: -15%;
+  height: 29%; border-radius: 50% 50% 0 0;
+  background: linear-gradient(#34364b, #171a2a);
+}
+.grass {
+  position: absolute; bottom: 14%; width: 100%;
+  height: 10%; background: linear-gradient(transparent,#252b39);
+}
+#camera {
+  position: absolute; inset: 0;
+  transform-origin: 50% 65%;
+  transition: transform 1.6s cubic-bezier(.2,.7,.2,1);
+}
+#person {
+  position: absolute; left: 50%; bottom: 10%;
+  width: 170px; height: 300px;
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+  transition: width 1.5s, height 1.5s, left 1.5s, bottom 1.5s;
+  animation: breathing 3.5s ease-in-out infinite;
+}
+@keyframes breathing {
+  0%,100% { translate: 0 0; }
+  50% { translate: 0 -3px; }
+}
+.head {
+  position: absolute; width: 76px; height: 92px;
+  left: 47px; top: 20px; border-radius: 45% 45% 43% 43%;
+  background: #d99a78;
+  box-shadow: inset -12px -3px #9d635c;
+}
+.ear {
+  position: absolute; top: 53px; width: 15px; height: 24px;
+  background: #c9806b; border-radius: 50%;
+}
+.ear.l { left: 38px; }
+.ear.r { left: 117px; }
+.neck {
+  position: absolute; left: 75px; top: 95px;
+  width: 26px; height: 32px; background: #b97b68;
+}
+.hair {
+  position: absolute; z-index: 3; left: 43px; top: 12px;
+  width: 83px; height: 47px; background: #171923;
+  border-radius: 50% 50% 30% 25%;
+  clip-path: polygon(0 20%, 14% 0, 27% 15%, 42% 0,
+    55% 14%, 75% 0, 100% 15%, 91% 72%, 80% 47%,
+    67% 80%, 56% 48%, 42% 78%, 30% 49%, 17% 76%, 8% 49%);
+  transform-origin: 65% 25%;
+  animation: hair 2.2s ease-in-out infinite alternate;
+}
+.hairback {
+  position: absolute; left: 46px; top: 25px;
+  width: 80px; height: 78px; border-radius: 40% 40% 35% 35%;
+  background: #191a25; z-index: 0;
+}
+@keyframes hair {
+  to { transform: rotate(4deg) skewX(-3deg); }
+}
+.eye {
+  position: absolute; top: 59px; width: 12px; height: 5px;
+  border-top: 2px solid #39252c;
   border-radius: 50%;
-  background: var(--accent);
-  filter: blur(120px);
-  opacity: 0.13;
-  animation: breathe 5s ease-in-out infinite alternate;
-  z-index: -1;
 }
-
-.frame {
-  position: absolute;
-  inset: 18px;
-  border: 1px solid #ffffff16;
-  pointer-events: none;
+.eye.l { left: 59px; }
+.eye.r { left: 99px; }
+.nose {
+  position: absolute; top: 60px; left: 85px;
+  width: 5px; height: 12px; border-right: 1px solid #9e6157;
 }
-
-.frame::before,
-.frame::after {
-  content: "";
-  position: absolute;
-  width: 45px;
-  height: 45px;
-  border-color: var(--accent);
-  border-style: solid;
+.mouth {
+  position: absolute; top: 81px; left: 78px;
+  width: 15px; height: 4px; border-bottom: 1.5px solid #743f46;
+  border-radius: 50%;
 }
-
-.frame::before {
-  top: -1px;
-  left: -1px;
-  border-width: 2px 0 0 2px;
+.body {
+  position: absolute; top: 117px; left: 22px;
+  width: 125px; height: 125px;
+  background: linear-gradient(100deg,#202431,#333c4d 50%,#171c29);
+  clip-path: polygon(30% 0,70% 0,100% 22%,84% 100%,
+    16% 100%,0 22%);
 }
-
-.frame::after {
-  bottom: -1px;
-  right: -1px;
-  border-width: 0 2px 2px 0;
+.shirt {
+  position: absolute; top: 117px; left: 69px;
+  width: 31px; height: 110px;
+  background: #d1c5bd;
+  clip-path: polygon(20% 0,80% 0,100% 100%,0 100%);
 }
-
-.content {
-  position: relative;
-  width: 100%;
-  padding: 24px;
-  text-align: center;
-  z-index: 2;
+.coat {
+  position: absolute; top: 117px; left: 22px;
+  width: 125px; height: 120px;
+  border-bottom: 1px solid #728092;
+  border-left: 1px solid #647083;
+  clip-path: polygon(30% 0,50% 10%,70% 0,100% 22%,
+    84% 100%,16% 100%,0 22%);
+  background: transparent;
 }
-
-.eyebrow {
-  color: var(--accent);
-  font-size: 11px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  margin-bottom: 28px;
-  opacity: 0;
-  animation: rise 1s 0.4s forwards;
+.arm {
+  position: absolute; top: 129px; width: 28px; height: 100px;
+  background: #222836; border-radius: 15px;
+  transform-origin: top center;
 }
-
-.name {
-  font-size: clamp(58px, 15vw, 140px);
-  line-height: 0.95;
-  font-weight: 900;
-  letter-spacing: -5px;
-  text-transform: uppercase;
-  background: linear-gradient(
-    180deg, #fff 10%, #b9efff 48%, #5498cb 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 24px #79e7ff30);
-  opacity: 0;
-  transform: scale(1.3);
-  animation: reveal 1.2s 1.2s forwards;
+.arm.l { left: 23px; transform: rotate(9deg); }
+.arm.r { right: 22px; transform: rotate(-9deg); }
+.leg {
+  position: absolute; top: 226px; width: 39px; height: 74px;
+  background: #242735; border-radius: 5px 5px 0 0;
 }
-
-.line {
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  box-shadow: 0 0 20px var(--accent);
-  margin: 26px auto;
-  animation: extend 1s 2.1s forwards;
+.leg.l { left: 48px; }
+.leg.r { left: 88px; }
+.windcoat {
+  position: absolute; z-index: -1; top: 132px; left: 10px;
+  width: 150px; height: 110px;
+  background: #353f52; opacity: .9;
+  clip-path: polygon(20% 0,80% 0,100% 90%,55% 72%,
+    20% 100%,0 25%);
+  transform-origin: top center;
+  animation: cloth 2s ease-in-out infinite alternate;
 }
-
-.tagline {
-  font-size: clamp(12px, 3vw, 17px);
-  letter-spacing: 4px;
-  color: #e2e8f7;
-  opacity: 0;
-  animation: rise 1s 2.5s forwards;
+@keyframes cloth {
+  to { transform: skewX(-9deg) rotate(-4deg); }
 }
-
-.description {
-  color: #8d9bb5;
-  font-size: 12px;
-  letter-spacing: 2px;
-  margin-top: 15px;
-  opacity: 0;
-  animation: rise 1s 3s forwards;
+.particle {
+  position: absolute; width: 3px; height: 3px;
+  border-radius: 50%; background: #ffe9c0;
+  box-shadow: 0 0 9px #ffd5a4;
+  animation: floatUp linear infinite;
 }
-
-.corner-text {
-  position: absolute;
-  bottom: 42px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 9px;
-  letter-spacing: 4px;
-  color: #71809b;
-  animation: fade 2s 3s both;
+@keyframes floatUp {
+  from { transform: translate(0, 15vh); opacity: 0; }
+  15% { opacity: .9; }
+  to { transform: translate(45px, -100vh); opacity: 0; }
 }
-
-.controls {
-  position: absolute;
-  z-index: 5;
-  bottom: 65px;
-  right: 35px;
-  display: flex;
-  gap: 10px;
+.vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(transparent 55%, #080a18a8),
+    radial-gradient(ellipse,transparent 35%,#090b1970 100%);
 }
-
+.toplabel {
+  position: absolute; top: 7%; left: 0; width: 100%;
+  text-align: center; font-size: 10px; letter-spacing: 4px;
+  color: #fff1d0; opacity: .8;
+}
+.subtitles {
+  position: absolute; z-index: 5; bottom: 13%;
+  left: 8%; right: 8%; text-align: center;
+  text-shadow: 0 2px 12px #10101c;
+}
+.subtitles p {
+  font-size: clamp(16px, 4vw, 23px);
+  line-height: 1.55; margin: 0 auto;
+  max-width: 650px; min-height: 3em;
+  opacity: 0; transform: translateY(12px);
+  transition: .8s ease;
+}
+.subtitles p.show { opacity: 1; transform: translateY(0); }
+.subtitles small {
+  display: block; margin-top: 12px;
+  color: #ffdbac; font-size: 10px; letter-spacing: 3px;
+}
+#controls {
+  position: absolute; z-index: 8; bottom: 22px; left: 0;
+  width: 100%; display: flex; justify-content: center; gap: 10px;
+}
 button {
-  padding: 10px 14px;
-  background: #101a2bc9;
-  border: 1px solid #79e7ff55;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 11px;
-  letter-spacing: 1px;
+  background: #171a2abf; color: white;
+  border: 1px solid #ffffff55; padding: 10px 15px;
+  border-radius: 20px; cursor: pointer;
 }
-
-button:hover {
-  background: #20384b;
-}
-
-.flash {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  background: white;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.scene.playing .flash {
-  animation: flash 0.7s 1.05s;
-}
-
-.scene.replay .eyebrow,
-.scene.replay .name,
-.scene.replay .line,
-.scene.replay .tagline,
-.scene.replay .description {
-  animation: none;
-  opacity: 0;
-}
-
-.scene.replay .name {
-  transform: scale(1.3);
-}
-
-.scene.replay .line {
-  width: 0;
-}
-
-.scene.replay .eyebrow {
-  animation: rise 1s 0.4s forwards;
-}
-
-.scene.replay .name {
-  animation: reveal 1.2s 1.2s forwards;
-}
-
-.scene.replay .line {
-  animation: extend 1s 2.1s forwards;
-}
-
-.scene.replay .tagline {
-  animation: rise 1s 2.5s forwards;
-}
-
-.scene.replay .description {
-  animation: rise 1s 3s forwards;
-}
-
-@keyframes reveal {
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes rise {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes extend {
-  to { width: min(240px, 65vw); }
-}
-
-@keyframes breathe {
-  to { transform: scale(1.3); opacity: 0.25; }
-}
-
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes flash {
-  0% { opacity: 0; }
-  15% { opacity: 0.75; }
-  100% { opacity: 0; }
-}
-
-@media (max-width: 500px) {
-  .name { letter-spacing: -2px; }
-  .eyebrow { letter-spacing: 3px; }
-  .tagline { letter-spacing: 2px; }
-  .controls {
-    bottom: 55px;
-    right: 0;
-    width: 100%;
-    justify-content: center;
-  }
-  .corner-text { bottom: 25px; }
+#movie.close #camera { transform: scale(2.5) translateY(17%); }
+#movie.close #person { left: 50%; bottom: -5%; }
+#movie.side #camera { transform: scale(1.45) translateX(-15%) rotate(-2deg); }
+#movie.side .head { transform: rotate(-10deg); }
+#movie.side .body { transform: skewY(-3deg); }
+#movie.wide #camera { transform: scale(1); }
+#movie.wide #person { width: 170px; }
+#movie.rear .head { transform: rotateY(180deg); }
+#movie.rear .eye, #movie.rear .nose, #movie.rear .mouth { opacity: 0; }
+#movie.rear .hair { height: 55px; }
+#movie.rear #camera { transform: scale(1.15) translateY(-2%); }
+@media(max-width:500px) {
+  #person { transform: translateX(-50%) scale(.9); }
+  .subtitles { bottom: 14%; }
+  .subtitles p { font-size: 16px; }
 }
 </style>
 </head>
-
 <body>
-<div class="scene playing" id="scene">
-  <canvas id="stars"></canvas>
-  <div class="glow"></div>
-  <div class="frame"></div>
-  <div class="flash"></div>
-
-  <main class="content">
-    <p class="eyebrow">This is my story</p>
-
-    <!-- CHANGE YOUR NAME HERE -->
-    <h1 class="name" id="heroName">SHREY</h1>
-
-    <div class="line"></div>
-
-    <!-- CHANGE YOUR TAGLINE HERE -->
-    <p class="tagline" id="heroTagline">
-      DREAM. CREATE. CONQUER.
-    </p>
-
-    <p class="description">
-      NOT HERE TO FOLLOW. HERE TO CREATE.
-    </p>
-  </main>
-
-  <div class="corner-text">
-    MY WORLD · MY RULES · MY JOURNEY
+<div id="movie" class="wide">
+  <div class="sky">
+    <div class="sun"></div>
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+    <div class="mountain"></div>
+    <div class="ground"></div>
+    <div class="grass"></div>
   </div>
 
-  <div class="controls">
-    <button id="replay">↻ REPLAY INTRO</button>
-    <button id="fullscreen">⛶ FULLSCREEN</button>
+  <div id="particles"></div>
+
+  <div id="camera">
+    <div id="person">
+      <div class="windcoat"></div>
+      <div class="hairback"></div>
+      <div class="ear l"></div><div class="ear r"></div>
+      <div class="neck"></div>
+      <div class="head"></div>
+      <div class="hair"></div>
+      <div class="eye l"></div><div class="eye r"></div>
+      <div class="nose"></div><div class="mouth"></div>
+      <div class="body"></div><div class="shirt"></div>
+      <div class="coat"></div>
+      <div class="arm l"></div><div class="arm r"></div>
+      <div class="leg l"></div><div class="leg r"></div>
+    </div>
+  </div>
+
+  <div class="toplabel">AN ORIGINAL STORY · CHAPTER 01</div>
+  <div class="vignette"></div>
+
+  <div class="subtitles">
+    <p id="caption"></p>
+    <small id="shot">WIDE SHOT</small>
+  </div>
+
+  <div id="controls">
+    <button id="play">▶ Play story</button>
+    <button id="restart">↻ Restart</button>
+    <button id="full">⛶</button>
   </div>
 </div>
 
 <script>
-const scene = document.getElementById("scene");
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
+const movie = document.getElementById("movie");
+const caption = document.getElementById("caption");
+const shotLabel = document.getElementById("shot");
 
-let stars = [];
-let width, height;
-let animationFrame;
+const story = [
+  {
+    shot: "WIDE SHOT · SUNSET",
+    camera: "wide",
+    text: "Every person has a story. This is where mine begins."
+  },
+  {
+    shot: "REAR SHOT · LOOKING AT THE SKY",
+    camera: "rear",
+    text: "I'm Shrey. A dreamer with a world of ideas inside my mind."
+  },
+  {
+    shot: "SIDE PROFILE · WIND RISING",
+    camera: "side",
+    text: "I want to create things that once existed only in my imagination."
+  },
+  {
+    shot: "CLOSE-UP · THE MOMENT",
+    camera: "close",
+    text: "I'm still learning, still growing, and still finding my own path."
+  },
+  {
+    shot: "WIDE SHOT · A NEW BEGINNING",
+    camera: "wide",
+    text: "This is my journey. And the best part of my story is still ahead."
+  }
+];
 
-function resize() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  width = window.innerWidth;
-  height = window.innerHeight;
+let current = 0;
+let timer = null;
 
-  canvas.width = width * dpr;
-  canvas.height = height * dpr;
-  canvas.style.width = width + "px";
-  canvas.style.height = height + "px";
+function showScene(index) {
+  current = index;
+  const part = story[index];
 
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  stars = Array.from({ length: 130 }, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    size: Math.random() * 1.8 + 0.3,
-    speed: Math.random() * 0.7 + 0.15,
-    alpha: Math.random() * 0.7 + 0.2
-  }));
-}
-
-function drawStars() {
-  ctx.clearRect(0, 0, width, height);
-
-  stars.forEach(star => {
-    star.y += star.speed;
-
-    if (star.y > height) {
-      star.y = 0;
-      star.x = Math.random() * width;
-    }
-
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(170,220,255,${star.alpha})`;
-    ctx.fill();
-  });
-
-  animationFrame = requestAnimationFrame(drawStars);
-}
-
-window.addEventListener("resize", resize);
-resize();
-drawStars();
-
-document.getElementById("replay").addEventListener("click", () => {
-  scene.classList.remove("replay", "playing");
-
-  // Force CSS to restart the intro animations.
-  void scene.offsetWidth;
-
-  scene.classList.add("replay", "playing");
+  movie.className = part.camera;
+  caption.classList.remove("show");
+  shotLabel.textContent = part.shot;
 
   setTimeout(() => {
-    scene.classList.remove("playing", "replay");
-  }, 4500);
-});
+    caption.textContent = part.text;
+    caption.classList.add("show");
+  }, 450);
+}
 
-document.getElementById("fullscreen").addEventListener("click", async () => {
-  try {
-    if (!document.fullscreenElement) {
-      await scene.requestFullscreen();
-    } else {
-      await document.exitFullscreen();
+function playStory() {
+  clearInterval(timer);
+  showScene(0);
+  timer = setInterval(() => {
+    if (current >= story.length - 1) {
+      clearInterval(timer);
+      timer = null;
+      return;
     }
-  } catch (error) {
-    alert("Fullscreen is not available in this browser.");
+    showScene(current + 1);
+  }, 4500);
+}
+
+document.getElementById("play").onclick = playStory;
+document.getElementById("restart").onclick = playStory;
+document.getElementById("full").onclick = async () => {
+  try {
+    if (!document.fullscreenElement) await movie.requestFullscreen();
+    else await document.exitFullscreen();
+  } catch (e) {
+    console.log("Fullscreen unavailable");
   }
-});
+};
+
+const particles = document.getElementById("particles");
+for (let i = 0; i < 35; i++) {
+  const p = document.createElement("i");
+  p.className = "particle";
+  p.style.left = Math.random() * 100 + "%";
+  p.style.top = Math.random() * 100 + "%";
+  p.style.animationDuration = (6 + Math.random() * 12) + "s";
+  p.style.animationDelay = (-Math.random() * 15) + "s";
+  p.style.opacity = Math.random();
+  particles.appendChild(p);
+}
+
+showScene(0);
 </script>
 </body>
 </html>
